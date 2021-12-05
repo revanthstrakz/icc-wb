@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const port = process.env.PORT || 3000;
+const port = 3000;
 const mongo = require('mongodb').MongoClient;
 
-mongo.connect('mongodb://localhost:27017/paint', (error, db) => {
+mongo.connect('mongodb://ec2-3-238-92-219.compute-1.amazonaws.com:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false/paint', (error, db) => {
 	if (error) throw error;
 	console.log('Connected to DB');
 	app.use(express.static(__dirname + '/public'));
@@ -23,6 +23,13 @@ mongo.connect('mongodb://localhost:27017/paint', (error, db) => {
 				if (error) console.log(error);
 			});
 			socket.broadcast.emit('paint', data);
+		});
+		socket.on('erase', (data) => {
+			
+			db.collection('paint').drop( (error, result) => {
+				if (error) console.log(error);
+			});
+			socket.broadcast.emit('erase', data);
 		});
 	}
 

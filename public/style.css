@@ -36,6 +36,12 @@ html, body {
   height: 48px;
   width: 48px;
 }
+.erase {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  border: 1px solid #000;
+}
 
 .color.black { background-color: black; }
 .color.red { background-color: red; }
