@@ -5,7 +5,7 @@ const io = require('socket.io')(http);
 const port = 3000;
 const mongo = require('mongodb').MongoClient;
 
-mongo.connect('mongodb://ec2-44-204-160-75.compute-1.amazonaws.com:27017/draw', (error, db) => {
+mongo.connect('mongodb://ec2-54-208-228-204.compute-1.amazonaws.com:27017/draw', (error, db) => {
 	if (error) throw error;
 	console.log('Connected to DB');
 	app.use(express.static(__dirname + '/public'));
